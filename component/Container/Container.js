@@ -9,7 +9,12 @@ const Container = () => {
     const [currentTemperature, setCurrentTemperature] = useState("Waiting...");
     const [hourlyTemperature, setHourlyTemperature] = useState([]);
     const [display, setDisplay] = useState("temperature")
+    
+    const [currentPrecipitation, setCurrentPrecipitation] = useState("Waiting...");
+    const [hourlyPrecipitation, setHourlyPrecipitation] = useState([]);
 
+    const [currentWind, setCurrentWind] = useState("Waiting...");
+    const [hourlyWind, setHourlyWind] = useState([]);
 
 
     return (
@@ -20,8 +25,8 @@ const Container = () => {
             <div className={"container-spa"}>
                 <UserInput current={setCurrentTemperature} hourly={setHourlyTemperature}></UserInput>
                 {display === "temperature" && <Display current={currentTemperature} hourly={hourlyTemperature} unit={"°C"}></Display>}
-                {display === "precipitation" && <Display current={currentTemperature} hourly={hourlyTemperature} unit={"mm"}></Display>}
-                {display === "wind" && <Display current={currentTemperature} hourly={hourlyTemperature} unit={"km/h"}></Display>}
+                {display === "precipitation" && <Display current={currentPrecipitation} hourly={hourlyPrecipitation} unit={"mm"}></Display>}
+                {display === "wind" && <Display current={currentWind} hourly={hourlyWind} unit={"km/h"}></Display>}
             </div>
             <style jsx>{`
                 .container {

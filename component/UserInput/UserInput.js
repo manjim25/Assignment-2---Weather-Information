@@ -4,23 +4,23 @@ import React, {useState} from 'react';
 
 const UserInput = ({current, hourly}) => {
     const [lat, setLat] = useState("0");
+    const [lot, setLot] = useState("0");
 
     const fetchTemperatureData = async () => {
 
-        const data =  await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=0&current=temperature_2m,precipitation,wind_speed_10m&hourly=temperature_2m,precipitation,wind_speed_10m&forecast_days=1`)
+        const data =  await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lot}&current=temperature_2m,precipitation,wind_speed_10m&hourly=temperature_2m,precipitation,wind_speed_10m&forecast_days=1`)
         console.log("fetchTemperatureData", data)
 
         return data.json()
     }
 
-
     const onClickHandler = () => {
         fetchTemperatureData().then(data => {
             console.log("onClickHandler", data)
-            current(data.current.temperature_2m)
-            hourly(data.hourly.temperature_2m)
+            current(data.current.temperature_2m,data.current.relative_humidity_2m,data.current.wind_speed_10m)
+            hourly(data.hourly.temperature_2m,data.hourly.relative_humidity_2m,data.hourly.wind_speed_10m)
         })
-       
+    
     }
     return (
         <div className={"user-input"}>
@@ -31,7 +31,7 @@ const UserInput = ({current, hourly}) => {
 
             <label>
                 <span>Longitude</span>
-                <input type={"text"} placeholder={"Longitude"} />
+                <input type={"text"} placeholder={"Longitude"} value={lot} onChange={e => setLot(e.target.value)} />
             </label>
 
 
